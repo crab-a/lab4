@@ -30,12 +30,20 @@ def load_data():
 
 
 def run_knn(points):
-    m = KNN(1)
+    m = KNN(5)
     m.train(points)
     print(f'predicted class: {m.predict(points[0])}')
     print(f'true class: {points[0].label}')
     cv = CrossValidation()
     cv.run_cv(points, 10, m, accuracy_score)
+
+
+def q2(k, points):
+    m = KNN(k)
+    m.train(points)
+    cv = CrossValidation()
+    return cv.run_cv(points, 10, m, accuracy_score)
+
 
 def run_1nn(points):
     m = KNN(1)
@@ -46,6 +54,16 @@ def run_1nn(points):
         real.append(point.label)
     print(accuracy_score(real, predicted))
 
+
 if __name__ == '__main__':
     loaded_points = load_data()
-    run_1nn(loaded_points)
+    # run_1nn(loaded_points)
+    best = 0
+    best_k = 0
+    for k in range(30):
+        current = q2(k + 1, loaded_points)
+        best = max(current, best)
+        if best == current:
+            best_k = k
+    print(best)
+    print(best_k)
