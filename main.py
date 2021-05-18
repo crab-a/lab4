@@ -37,7 +37,15 @@ def run_knn(points):
     cv = CrossValidation()
     cv.run_cv(points, 10, m, accuracy_score)
 
+def run_1nn(points):
+    m = KNN(1)
+    m.train(points)
+    predicted = m.predict(points)
+    real = []
+    for point in points:
+        real.append(point.label)
+    print(accuracy_score(real, predicted))
 
 if __name__ == '__main__':
     loaded_points = load_data()
-    run_knn(loaded_points)
+    run_1nn(loaded_points)
