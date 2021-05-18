@@ -42,7 +42,22 @@ def q2(k, points):
     m = KNN(k)
     m.train(points)
     cv = CrossValidation()
-    return cv.run_cv(points, 10, m, accuracy_score)
+    return cv.run_cv(points, 10, m, accuracy_score, False)
+
+
+def q3(k, points):
+    m = KNN(k)
+    m.train(points)
+    cv = CrossValidation()
+
+    print("Question 3:")
+    print(f'K={k}')
+    print("2-fold-cross-validation:")
+    cv.run_cv(points, 2, m, accuracy_score, False, True)
+    print("10-fold-cross-validation:")
+    cv.run_cv(points, 10, m, accuracy_score, False, True)
+    print("20-fold-cross-validation:")
+    cv.run_cv(points, 20, m, accuracy_score, False, True)
 
 
 def run_1nn(points):
@@ -65,5 +80,4 @@ if __name__ == '__main__':
         best = max(current, best)
         if best == current:
             best_k = k
-    print(best)
-    print(best_k)
+    q3(best_k, loaded_points)
