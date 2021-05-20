@@ -77,7 +77,7 @@ def q4(points):
         m = KNN(num)
         m.train(points)
         cv = CrossValidation()
-        cv.run_cv(points, 2, m, accuracy_score())
+        cv.run_cv(points, 2, m, accuracy_score)
 
 
 def q4b(points):
@@ -86,11 +86,18 @@ def q4b(points):
     normed_points = m.transform(points)
     q4(normed_points)
 
+
 def q4c(points):
     m = MaxMinNormalizer()
     m.fit(points)
-    normed_opints = m.transform(points)
-    q4(normed_opints)
+    normed_points = m.transform(points)
+    q4(normed_points)
+
+def q4d(points):
+    m = ZNormalizer()
+    m.fit(points)
+    normed_points = m.transform(points)
+    q4(normed_points)
 
 
 if __name__ == '__main__':

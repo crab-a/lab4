@@ -27,7 +27,7 @@ class L1Norm:
             new_coordinates = []
             n_coordinates = p.coordinates
             for i, x in enumerate(n_coordinates):
-                new_coordinates.append(x / self.sum_abs_list)
+                new_coordinates.append(x / self.sum_abs_list[i])
             new.append(Point(p.name, new_coordinates, p.label))
         return new
 
