@@ -105,7 +105,6 @@ def q4d(points, k):
 
 
 def q4(points, k):
-    print('Question 4:')
     print(f'K={k}')
     q4_print(points, k)
     q4b(points, k)
@@ -124,5 +123,7 @@ if __name__ == '__main__':
         if best == current:
             best_k = k + 1
     q3(best_k, loaded_points)
+    print('Question 4:')
     q4(loaded_points, 5)
     q4(loaded_points, 7)
+    print("{}/100".format(k), end="\r")
