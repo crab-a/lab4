@@ -43,7 +43,7 @@ def q2(k, points):
     m.train(points)
     l = len(points)
     cv = CrossValidation()
-    return cv.run_cv(points, l, m, accuracy_score)
+    return cv.run_cv(points, l, m, accuracy_score, False, False)
 
 
 def q3(k, points):
@@ -71,33 +71,39 @@ def run_1nn(points):
     print(accuracy_score(real, predicted))
 
 
-def q4(points):
-    hamesh_sheva = [5, 7]
-    for num in hamesh_sheva:
-        m = KNN(num)
-        m.train(points)
-        cv = CrossValidation()
-        cv.run_cv(points, 2, m, accuracy_score)
+def q4a(points, k):
+    m = KNN(k)
+    m.train(points)
+    cv = CrossValidation()
+    return cv.run_cv(points, 2, m, accuracy_score, False, True)
 
 
-def q4b(points):
+def q4b(points, k):
     m = L1Norm()
     m.fit(points)
     normed_points = m.transform(points)
-    q4(normed_points)
+    print(f'Accuracy of SumNormalizer is {q4a(normed_points, k)}')
 
-
-def q4c(points):
+def q4c(points, k):
     m = MaxMinNormalizer()
     m.fit(points)
     normed_points = m.transform(points)
-    q4(normed_points)
+    q4a(normed_points, k)
 
-def q4d(points):
+
+def q4d(points, k):
     m = ZNormalizer()
     m.fit(points)
     normed_points = m.transform(points)
-    q4(normed_points)
+    q4a(normed_points, k)
+
+
+def q4(points, k):
+    print(f'K={k}')
+    q4a(points, k)
+    q4b(points, k)
+    q4c(points, k)
+    q4d(points, k)
 
 
 if __name__ == '__main__':
@@ -110,7 +116,6 @@ if __name__ == '__main__':
         best = max(current, best)
         if best == current:
             best_k = k + 1
-    print(best)
-    print(best_k)
     q3(best_k, loaded_points)
-    q4c(loaded_points)
+    q4(loaded_points, 5)
+    q4(loaded_points, 7)

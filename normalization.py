@@ -71,7 +71,7 @@ class MaxMinNormalizer:
         new = []
         for p in points:
             new_coordinates = p.coordinates
-            new_coordinates = [(new_coordinates[i] - self.min_values[i]) / (self.min_values - self.max_values)
+            new_coordinates = [(new_coordinates[i] - self.min_values[i]) / (self.min_values[i] - self.max_values[i])
                                for i in range(len(p.coordinates))]
             new.append(Point(p.name, new_coordinates, p.label))
         return new
