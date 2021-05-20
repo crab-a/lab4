@@ -101,12 +101,14 @@ def q4d(points, k):
     m = ZNormalizer()
     m.fit(points)
     normed_points = m.transform(points)
-    print(f'Accuracy of ZNormalizer is {q4_print(normed_points, k)}\n')
+    print(f'Accuracy of ZNormalizer is {q4_print(normed_points, k)}')
+    if k==5:
+        print('')
 
 
 def q4(points, k):
     print(f'K={k}')
-    q4_print(points, k)
+    q4a(points, k)
     q4b(points, k)
     q4c(points, k)
     q4d(points, k)
@@ -126,4 +128,3 @@ if __name__ == '__main__':
     print('Question 4:')
     q4(loaded_points, 5)
     q4(loaded_points, 7)
-    print("{}/100".format(k), end="\r")
