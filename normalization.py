@@ -51,3 +51,27 @@ class ZNormalizer:
                                for i in range(len(p.coordinates))]
             new.append(Point(p.name, new_coordinates, p.label))
         return new
+
+
+class MaxMinNormalizer:
+    def __init__(self):
+        self.min_values = []
+        self.max_values = []
+
+    def fit(self, points):
+        all_coordinates = [p.coordinates for p in points]
+        self.min_values = []
+        self.max_values = []
+        for point in range(len(all_coordinates[0])):
+            features = [feature[point] for feature in all_coordinates]
+            self.min_values.append(min(features))
+            self.max_values.append(max(features))
+
+    def transform(self, points):
+        new = []
+        for p in points:
+            new_coordinates = p.coordinates
+            new_coordinates = [(new_coordinates[i] - self.min_values[i]) / (self.min_values - self.max_values)
+                               for i in range(len(p.coordinates))]
+            new.append(Point(p.name, new_coordinates, p.label))
+        return new
