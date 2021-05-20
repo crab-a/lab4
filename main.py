@@ -41,8 +41,9 @@ def run_knn(points):
 def q2(k, points):
     m = KNN(k)
     m.train(points)
+    l = len(points)
     cv = CrossValidation()
-    return cv.run_cv(points, 10, m, accuracy_score, False)
+    return cv.run_cv(points, l, m, accuracy_score)
 
 
 def q3(k, points):
@@ -69,6 +70,20 @@ def run_1nn(points):
         real.append(point.label)
     print(accuracy_score(real, predicted))
 
+def q4(points):
+    hamesh_sheva = [5,7]
+    for num in hamesh_sheva:
+        m = KNN(num)
+        m.train(points)
+        cv = CrossValidation()
+        cv.run_cv(points, 2, m, accuracy_score())
+
+def q4b(points):
+    m = L1Norm()
+    m.fit(points)
+    normed_points = m.transform(points)
+    q4(normed_points)
+
 
 if __name__ == '__main__':
     loaded_points = load_data()
@@ -79,5 +94,7 @@ if __name__ == '__main__':
         current = q2(k + 1, loaded_points)
         best = max(current, best)
         if best == current:
-            best_k = k
+            best_k = k +1
+    print(best)
+    print(best_k)
     q3(best_k, loaded_points)
