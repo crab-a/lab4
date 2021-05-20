@@ -71,36 +71,42 @@ def run_1nn(points):
     print(accuracy_score(real, predicted))
 
 
-def q4a(points, k):
+def q4_print(points, k):
     m = KNN(k)
     m.train(points)
     cv = CrossValidation()
     return cv.run_cv(points, 2, m, accuracy_score, False, True)
 
 
+def q4a(points, k):
+    m = DummyNormalizer()
+    m.fit(points)
+    normed_points = m.transform(points)
+    print(f'Accuracy of DummyNormalizer is {q4_print(normed_points, k)}\n')
+
 def q4b(points, k):
     m = L1Norm()
     m.fit(points)
     normed_points = m.transform(points)
-    print(f'Accuracy of SumNormalizer is {q4a(normed_points, k)}')
+    print(f'Accuracy of SumNormalizer is {q4_print(normed_points, k)}\n')
 
 def q4c(points, k):
     m = MaxMinNormalizer()
     m.fit(points)
     normed_points = m.transform(points)
-    q4a(normed_points, k)
+    print(f'Accuracy of MinMaxNormalizer is {q4_print(normed_points, k)}\n')
 
 
 def q4d(points, k):
     m = ZNormalizer()
     m.fit(points)
     normed_points = m.transform(points)
-    q4a(normed_points, k)
+    print(f'Accuracy of ZNormalizer is {q4_print(normed_points, k)}\n')
 
 
 def q4(points, k):
     print(f'K={k}')
-    q4a(points, k)
+    q4_print(points, k)
     q4b(points, k)
     q4c(points, k)
     q4d(points, k)
