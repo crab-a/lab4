@@ -78,6 +78,7 @@ def q4a(points, k):
     return cv.run_cv(points, 2, m, accuracy_score, False, True)
 
 
+
 def q4b(points, k):
     m = L1Norm()
     m.fit(points)
