@@ -105,6 +105,7 @@ def q4d(points, k):
 
 
 def q4(points, k):
+    print('Question 4:')
     print(f'K={k}')
     q4_print(points, k)
     q4b(points, k)
